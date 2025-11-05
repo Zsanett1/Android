@@ -15,7 +15,7 @@ object RetrofitClient {
 
         // 🔹 1. Logging interceptor (kiírja a kéréseket)
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
 
         // 🔹 2. Token interceptor (Authorization header)
         val tokenInterceptor = Interceptor { chain ->

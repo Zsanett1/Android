@@ -48,6 +48,7 @@ class LoginFragment : Fragment() {
             result.onSuccess { authResponse ->
                 // Handle successful login (e.g., navigate to home screen)
                 Toast.makeText(requireContext(), "Welcome ${authResponse.user.name}", Toast.LENGTH_LONG).show()
+                Log.d("LoginFragment", "Access token: ${authResponse.tokens.accessToken}")
                 val session = SessionManager(requireContext().applicationContext)
                 session.saveAuthToken(authResponse.tokens.accessToken)
 
