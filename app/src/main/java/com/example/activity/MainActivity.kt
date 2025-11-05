@@ -1,55 +1,38 @@
 package com.example.activity
 
-import android.content.ContentValues.TAG
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.activity.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        Log.d(TAG, "onCreate: MainActivity created.")
 
+        // ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val message = intent.getStringExtra("message")
-        binding.textViewDisplay.text = message
-    }
+        // NavHostFragment kinyerése az XML-ből
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart: MainActivity started.")
+        // Top-level destinationök (ahol nincs vissza nyíl)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.homeFragment, R.id.profileFragment)
+        )
 
-    }
+        // ActionBar beállítása
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume: MainActivity resumed.")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause: MainActivity paused.")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop: MainActivity stopped.")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "onRestart: MainActivity restarted.")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy: MainActivity destroyed.")
+        // BottomNavigationView összekötése a NavController-rel
+        binding.bottomNav.setupWithNavController(navController)
     }
 }
