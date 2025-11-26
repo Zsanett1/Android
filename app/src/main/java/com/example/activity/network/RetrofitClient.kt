@@ -4,10 +4,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.content.Context
 import com.example.activity.network.ApiService
+import com.example.activity.utils.LocalDateTimeAdapter
 import com.example.activity.utils.SessionManager
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.time.LocalDateTime
 
 object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:8080"
@@ -36,10 +39,15 @@ object RetrofitClient {
             .addInterceptor(AuthInterceptor(context.applicationContext))
             .build()
 
+        val gson = GsonBuilder().registerTypeAdapter(
+            LocalDateTime::class.java,
+                LocalDateTimeAdapter()
+        ).create()
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService::class.java)
     }

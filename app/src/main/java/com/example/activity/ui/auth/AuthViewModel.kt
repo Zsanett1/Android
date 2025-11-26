@@ -12,25 +12,33 @@ import retrofit2.Response
 
 class AuthViewModel(application: Application) :
     AndroidViewModel(application) {
-    private val repository = AuthRepository(application)
+    private val authRepository = AuthRepository(application)
     private val _authResult = MutableLiveData<Result<AuthResponse>>()
     val authResult: LiveData<Result<AuthResponse>> = _authResult
+    private val _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun login(email: String, password: String) {
+        _isLoading.value = true
+
         viewModelScope.launch {
             try {
-                val response = repository.login(email, password)
-                handleResponse(response)
+                val response = authRepository.login(email, password)
+
+                if (response.isSuccessful && response.body() != null) {
+                    _authResult.postValue(Result.success(response.body()!!))
+                } else {
+                    _authResult.postValue(
+                        Result.failure(Exception("Login failed: ${response.code()}"))
+                    )
+                }
+
             } catch (e: Exception) {
                 _authResult.postValue(Result.failure(e))
+            } finally {
+                _isLoading.postValue(false)
             }
         }
     }
 
-    private fun handleResponse(response: Response<AuthResponse>) {
-        if (response.isSuccessful && response.body() != null) {
-            _authResult.postValue(Result.success(response.body()!!))
-        } else {
-            _authResult.postValue(Result.failure(Exception("Auth failed: ${response.code()}")))
-        }
-    }
 }

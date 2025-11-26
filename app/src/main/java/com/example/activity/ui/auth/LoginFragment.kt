@@ -19,6 +19,9 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AuthViewModel by viewModels()
+
+    var lastLoginEmail: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,11 +46,21 @@ class LoginFragment : Fragment() {
                 viewModel.login(email, password)
             }
         }
+        viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            if (loading) {
+                binding.buttonLogin.isEnabled = false
+                binding.buttonLogin.text = "Logging in..."
+            } else {
+                binding.buttonLogin.isEnabled = true
+                binding.buttonLogin.text = "Login"
+            }
+        }
+
         viewModel.authResult.observe(viewLifecycleOwner) { result ->
             Log.d("LoginFragment", "authResult: $result")
             result.onSuccess { authResponse ->
                 // Handle successful login (e.g., navigate to home screen)
-                Toast.makeText(requireContext(), "Welcome ${authResponse.user.name}", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Welcome ${authResponse.user.email}", Toast.LENGTH_LONG).show()
                 Log.d("LoginFragment", "Access token: ${authResponse.tokens.accessToken}")
                 val session = SessionManager(requireContext().applicationContext)
                 session.saveAuthToken(authResponse.tokens.accessToken)
