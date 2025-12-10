@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.home.HomeFragment">
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
 
-    <!-- RecyclerView for schedules -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSchedules"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
+            android:layout_marginBottom="70dp"
             tools:listitem="@layout/item_home_schedule"/>
 
-    <!-- Empty view (visible only if list is empty) -->
+    <!-- Empty text -->
     <TextView
             android:id="@+id/tvEmpty"
             android:layout_width="match_parent"
@@ -22,6 +24,34 @@
             android:textSize="18sp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:padding="16dp"/>
 
-</FrameLayout>
+    <!-- Bottom bar -->
+    <LinearLayout
+            android:id="@+id/bottomButtons"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="12dp"
+            android:background="#EEEEEE">
+
+        <Button
+                android:id="@+id/btnAddHabit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ADD HABIT" />
+
+        <Button
+                android:id="@+id/btnAddSchedule"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ADD SCHEDULE"
+                android:layout_marginStart="12dp"/>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

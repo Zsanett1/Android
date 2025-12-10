@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.activity.R
 import com.example.activity.databinding.FragmentHomeBinding
 import com.example.activity.repository.ScheduleRepository
 import java.time.LocalDate
@@ -49,6 +51,14 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
         setupObservers()
+        binding.btnAddHabit.setOnClickListener {
+            findNavController().navigate(R.id.addHabitFragment)
+        }
+
+        binding.btnAddSchedule.setOnClickListener {
+            findNavController().navigate(R.id.createScheduleFragment)
+        }
+
     }
 
     private fun setupUi() {

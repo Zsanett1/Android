@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            tools:context=".ui.habit.AddHabitFragment">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+                android:id="@+id/tvAddHabitTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add New Habit"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+        <!-- Habit Name -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Habit name" />
+
+        <EditText
+                android:id="@+id/etHabitName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g. Morning Run"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="12dp" />
+
+        <!-- Description -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description" />
+
+        <EditText
+                android:id="@+id/etHabitDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Why do you want this habit?"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:layout_marginBottom="12dp" />
+
+        <!-- Goal -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal" />
+
+        <EditText
+                android:id="@+id/etHabitGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g. Run 10 times in 2 weeks"
+                android:inputType="text"
+                android:layout_marginBottom="12dp" />
+
+        <!-- Category -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category" />
+
+        <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
+
+        <!-- Buttons row -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+            <Button
+                    android:id="@+id/btnCancelHabit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel" />
+
+            <Button
+                    android:id="@+id/btnCreateHabit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create"
+                    android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

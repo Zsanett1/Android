@@ -37,6 +37,18 @@
     </fragment>
 
     <fragment
+            android:id="@+id/addHabitFragment"
+            android:name="com.example.activity.ui.habit.AddHabitFragment"
+            android:label="Add Habit"
+            tools:layout="@layout/fragment_add_habit" />
+
+    <fragment
+            android:id="@+id/createScheduleFragment"
+            android:name="com.example.activity.ui.schedule.CreateScheduleFragment"
+            android:label="Create Schedule"
+            tools:layout="@layout/fragment_create_schedule" />
+
+    <fragment
             android:id="@+id/registerFragment"
             android:name="com.example.activity.ui.auth.RegisterFragment"
             android:label="Register"
